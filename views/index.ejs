@@ -1,8 +1,16 @@
 <% include partial/header %>
-<h1>Index page</h1>
+
 <% blogData.forEach(function(data) { %>
     <div>
         <h1><%= data.title%></h1>
+        <img class="ui centred rounded image" src="<%=data.image%>">
+        <p>
+            <% if(data.body){ %>
+            <%= data.body.substring(0,100) %> ...
+                
+        </p>
+        <a href="/blog/<%=data._id%>">Read More</a>
+        <% } %>
     </div>
 <% }) %>
 <% include partial/footer %>
