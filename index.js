@@ -1,12 +1,13 @@
 var bodyParser = require("body-parser"),
     express = require("express"),
     app = express(),
+    methodOverride = require("method-override"),
     mongoose = require("mongoose");
 //Config
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
-
+app.use(methodOverride("_method"));
 //Database
 mongoose.connect("mongodb://localhost/restful_full_blog_app");
 
@@ -53,6 +54,26 @@ app.get("/blog/:id",function(req,res){
     Blog.findById(req.params.id,function(err,postContent){
         if(!err){
             res.render("show",{postContent:postContent});
+        } else{
+            res.redirect("/blog");
+        }
+    });
+});
+
+//Edit page
+app.get("/blog/:id/edit",function(req,res){
+    Blog.findById(req.params.id,function(err,postContent){
+        if(!err){
+            res.render("edit",{postContent:postContent});
+        } else{
+            res.redirect("/blog");
+        }
+    });})
+
+app.put("/edit/:id",function(req,res){
+    Blog.findByIdAndUpdate(req.params.id,req.body.post,function(err,updatedPost){
+        if(!err){
+            res.redirect("/blog/"+req.params.id);
         } else{
             res.redirect("/blog");
         }
