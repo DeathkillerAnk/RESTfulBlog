@@ -1,16 +1,35 @@
 <% include partial/header %>
 
-<% blogData.forEach(function(data) { %>
-    <div>
-        <h1><%= data.title%></h1>
-        <img class="ui centred rounded image" src="<%=data.image%>">
-        <p>
-            <% if(data.body){ %>
-            <%= data.body.substring(0,100) %> ...
-                
-        </p>
-        <a href="/blog/<%=data._id%>">Read More</a>
-        <% } %>
+<div class="ui main text container">
+    <div class="ui huge header">Restful Blog App</div>
+    <div class="ui top attached segment">
+        <div class="ui divided items">
+            <% blogData.forEach(function(data) { %>
+                <div class="item">
+                    <div class="image">
+                        <img class="ui centred rounded image" src="<%=data.image%>">
+                    </div>
+                    <div class="content">
+                        <a class="header" href="/blog/<%=data._id%>"><%=data.title%></a>
+                        <div class="meta">
+                            <span><%=data.created.toDateString()%></span>
+                        </div>
+                        <% if(data.body){ %>
+                            <div class="description">
+                                <p><%- data.body.substring(0,100) %>...</p>
+                            </div>
+                        <% } %>
+                        <div class="extra">
+                            <a class="ui floated basic violet button" href="/blog/<%=data._id%>">
+                                View Post
+                                <i class="right chevron icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
     </div>
-<% }) %>
+</div>
+
 <% include partial/footer %>

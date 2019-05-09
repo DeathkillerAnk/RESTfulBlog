@@ -8,8 +8,12 @@
                 <span><%=postContent.created.toDateString()%></span>
             </div>
             <div class="description">
-                <p><%=postContent.body%></p>
+                <p><%-postContent.body%></p>
             </div>
+            <form action="/blog/<%=postContent._id%>/delete?_method=DELETE" id="delete" class="ui form" method="POST">
+                <button class="ui red button basic">Delete</button>
+            </form>
+            <a href="/blog/<%=postContent._id%>/edit/" class="ui orange basic button">Edit</a>
         </div>
     </div>
 </div>
