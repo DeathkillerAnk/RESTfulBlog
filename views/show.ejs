@@ -4,12 +4,13 @@
     <div class="ui top attached">
         <div class="item">
             <img class="ui centred rounded image" src="<%=postContent.image%>">
+            <div class="description content">
+                    <p><%-postContent.body%></p>
+                </div>
             <div class="content">
                 <span><%=postContent.created.toDateString()%></span>
             </div>
-            <div class="description">
-                <p><%-postContent.body%></p>
-            </div>
+            
             <form action="/blog/<%=postContent._id%>/delete?_method=DELETE" id="delete" class="ui form" method="POST">
                 <button class="ui red button basic">Delete</button>
             </form>
